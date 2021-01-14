@@ -74,6 +74,7 @@ abstract class AuthFormState<T extends AuthForm> extends State<T> {
       key: _formKey,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: children(context),
       ),

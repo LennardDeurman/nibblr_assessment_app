@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nibblr/components/forms/auth/registration.dart';
 import 'package:nibblr/pages/auth/base.dart';
 
 class RegistrationPage extends AuthPage {
@@ -14,7 +15,7 @@ class _RegistrationPageState extends AuthPageState<RegistrationPage> {
 
   @override
   Widget body(BuildContext context) {
-    return RegistrationPage();
+    return RegistrationForm();
   }
 
 }
