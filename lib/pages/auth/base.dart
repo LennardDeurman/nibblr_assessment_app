@@ -15,6 +15,7 @@ abstract class AuthPageState<T extends AuthPage> extends State<T> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.orange,
+      appBar: AppBar(),
       body: Container(
         padding: EdgeInsets.all(20),
         child: Theme(
@@ -23,7 +24,7 @@ abstract class AuthPageState<T extends AuthPage> extends State<T> {
               accentColor: Colors.orange,
               hintColor: Colors.white
           ),
-          child: body(context),
+          child: SingleChildScrollView(child: body(context)),
         ),
       ),
 
