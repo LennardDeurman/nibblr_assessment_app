@@ -23,7 +23,7 @@ class ApiRequest {
     return http.get(url.toString(), headers: headers);
   }
 
-  Future<http.http.Response> delete() {
+  Future<http.Response> delete() {
     return http.delete(url.toString(), headers: headers);
   }
 
