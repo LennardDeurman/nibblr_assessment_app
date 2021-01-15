@@ -42,7 +42,7 @@ class RequestHelper {
     return response;
   }
 
-  Future<T> singleObjectRequest<T>({ String route, T Function(Map) toObject, RequestMethod method = RequestMethod.get, Map<String, dynamic> body}) async {
+  Future<T> singleObjectRequest<T>({ String route, T Function(Map) toObject, RequestMethod method = RequestMethod.get, Map<String, dynamic> body, Function(Map map) findRootInMap}) async {
 
     var response = await executeRequest(
         route: route,
@@ -50,21 +50,34 @@ class RequestHelper {
         body: body
     );
 
-    return ParsingOperation<T>(response, toObject: (Map map) {
+
+
+    var object = ParsingOperation<T>(response, toObject: (Map map) {
       return toObject(map);
-    }).singleObject();
+    }, findRootInMap: findRootInMap).singleObject();
+
+    if (object == null) {
+      throw Exception("No data from server");
+    }
+    return object;
   }
 
-  Future<List<T>> multiObjectsRequest<T>({ String route, T Function(Map) toObject, RequestMethod method = RequestMethod.get, Map<String, dynamic> body}) async {
+  Future<List<T>> multiObjectsRequest<T>({ String route, T Function(Map) toObject, RequestMethod method = RequestMethod.get, Map<String, dynamic> body, Function(Map map) findRootInMap}) async {
     var response = await executeRequest(
         route: route,
         method: method,
         body: body
     );
 
-    return ParsingOperation<T>(response, toObject: (Map map) {
+    var objects = ParsingOperation<T>(response, toObject: (Map map) {
       return toObject(map);
-    }).asList();
+    }, findRootInMap: findRootInMap).asList();
+
+    if (objects == null) {
+      throw Exception("No data from server");
+    }
+
+    return objects;
   }
 
 

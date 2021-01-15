@@ -27,6 +27,8 @@ abstract class BaseObject with Parsable, Mappable {
     parse(dictionary);
   }
 
+  BaseObject.create();
+
   @override
   void parse(Map<String, dynamic> dictionary) {
     id = dictionary[BaseObjectKeys.id];

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nibblr/components/forms/auth/base.dart';
+import 'package:nibblr/models/login.dart';
 
 class LoginForm extends AuthForm {
+
+  LoginForm ({ Function(dynamic) onSubmit }) : super(onSubmit: onSubmit);
 
   @override
   AuthFormState<AuthForm> createState() {
@@ -25,6 +28,14 @@ class LoginFormState extends AuthFormState<LoginForm> {
   }
 
   @override
+  collectData() {
+    return LoginData(
+      email: _emailTextController.text,
+      password: _passwordTextController.text
+    );
+  }
+
+  @override
   List<Widget> children(BuildContext context) {
     return [
       Container(
@@ -32,6 +43,7 @@ class LoginFormState extends AuthFormState<LoginForm> {
           vertical: 10
         ),
         child: textFormField(
+            context,
             controller: _emailTextController,
             labelText: "Email",
             hintText: "Bijv. info@nibblr.nl"
@@ -42,9 +54,12 @@ class LoginFormState extends AuthFormState<LoginForm> {
             vertical: 10
         ),
         child: textFormField(
+            context,
             controller: _passwordTextController,
             labelText: "Wachtwoord",
-            hintText: "******"
+            obscure: true,
+            hintText: "******",
+
         ),
       ),
       Container(

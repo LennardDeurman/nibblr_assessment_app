@@ -23,7 +23,10 @@ class Api {
         route: Routes.login,
         body: data.toMap(),
         method: RequestMethod.post,
-        toObject: (Map map) => AuthResult(map)
+        findRootInMap: (Map map) => map,
+        toObject: (Map map) {
+          return AuthResult(map);
+        }
     );
     return result;
   }
@@ -33,7 +36,8 @@ class Api {
         route: Routes.register,
         body: data.toMap(),
         method: RequestMethod.post,
-        toObject: (Map map) => AuthResult(map)
+        toObject: (Map map) => AuthResult(map),
+        findRootInMap: (Map map) => map
     );
     return result;
   }
@@ -61,10 +65,12 @@ class Api {
 
   Future<Dinner> createDinner(Dinner dinner) {
     return requestHelper.singleObjectRequest<Dinner>(
-      route: Routes.dinner(dinner.id),
+      route: Routes.dinners,
       body: dinner.toMap(),
       method: RequestMethod.post,
-      toObject: (Map map) => Dinner(map)
+      toObject: (Map map) {
+        return Dinner(map);
+      }
     );
   }
 

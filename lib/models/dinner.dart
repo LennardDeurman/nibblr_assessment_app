@@ -27,6 +27,8 @@ class Dinner extends BaseObject {
 
   Dinner (Map<String, dynamic> map) : super(map);
 
+  Dinner.create() : super.create();
+
   @override
   void parse(Map<String, dynamic> dictionary) {
     super.parse(dictionary);
@@ -51,9 +53,7 @@ class Dinner extends BaseObject {
       DinnerKeys.end: DateUtil.toDateStr(end),
       DinnerKeys.title: title,
       DinnerKeys.description: description,
-      DinnerKeys.maxMembers: maxMembers,
-      DinnerKeys.address: address.toMap(),
-      DinnerKeys.host: host.toMap()
+      DinnerKeys.maxMembers: maxMembers
     });
     return dict;
   }

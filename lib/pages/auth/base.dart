@@ -9,11 +9,14 @@ abstract class AuthPage extends StatefulWidget {
 
 abstract class AuthPageState<T extends AuthPage> extends State<T> {
 
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   Widget body(BuildContext context);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: Colors.orange,
       appBar: AppBar(
         elevation: 0,

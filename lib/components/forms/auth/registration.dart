@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nibblr/components/forms/auth/base.dart';
+import 'package:nibblr/models/registration.dart';
 
 class RegistrationForm extends AuthForm {
+
+  RegistrationForm ({ Function(dynamic) onSubmit }) : super(onSubmit: onSubmit);
 
   @override
   AuthFormState<AuthForm> createState() {
@@ -36,6 +39,19 @@ class RegistrationFormState extends AuthFormState<RegistrationForm> {
   }
 
   @override
+  collectData() {
+    return RegistrationData(
+      email: _emailTextController.text,
+      password: _passwordTextController.text,
+      passwordConfirmation: _passwordConfirmationTextController.text,
+      firstName: _firstNameTextController.text,
+      lastName: _lastNameTextController.text,
+      bio: _bioTextController.text,
+      address: null
+    );
+  }
+
+  @override
   List<Widget> children(BuildContext context) {
     return [
       Container(
@@ -43,6 +59,7 @@ class RegistrationFormState extends AuthFormState<RegistrationForm> {
             vertical: 10
         ),
         child: textFormField(
+            context,
             controller: _emailTextController,
             labelText: "Email",
             hintText: "Bijv. info@nibblr.nl"
@@ -53,9 +70,11 @@ class RegistrationFormState extends AuthFormState<RegistrationForm> {
             vertical: 10
         ),
         child: textFormField(
+            context,
             controller: _passwordTextController,
             labelText: "Wachtwoord",
-            hintText: "******"
+            hintText: "******",
+            obscure: true
         ),
       ),
       Container(
@@ -63,6 +82,7 @@ class RegistrationFormState extends AuthFormState<RegistrationForm> {
             vertical: 10
         ),
         child: textFormField(
+            context,
             controller: _passwordConfirmationTextController,
             labelText: "Herhaal wachtwoord",
             hintText: "******"
@@ -75,12 +95,14 @@ class RegistrationFormState extends AuthFormState<RegistrationForm> {
         child: Row(
           children: [
             Expanded(child: textFormField(
+                context,
                 controller: _firstNameTextController,
                 labelText: "Voornaam",
                 hintText: "bv. Lennard"
             )),
             SizedBox(width: 10),
             Expanded(child: textFormField(
+                context,
                 controller: _lastNameTextController,
                 labelText: "Achternaam",
                 hintText: "bv. Deurman"
@@ -93,6 +115,7 @@ class RegistrationFormState extends AuthFormState<RegistrationForm> {
             vertical: 10
         ),
         child: multiLineTextField(
+            context,
             controller: _bioTextController,
             labelText: "Over mij",
             hintText: "Vertel wat over jezelf..."

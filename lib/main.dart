@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:nibblr/logic/auth_service.dart';
+import 'package:nibblr/models/auth.dart';
+import 'package:nibblr/pages/auth/login.dart';
 import 'package:nibblr/pages/home/main.dart';
 
 void main() {
@@ -27,7 +30,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      home: LoginPage(),
     );
   }
 }

@@ -3,6 +3,10 @@ import 'package:nibblr/components/forms/base.dart';
 
 abstract class AuthForm extends StatefulWidget {
 
+  final Function(dynamic) onSubmit;
+
+  AuthForm ({ @required this.onSubmit });
+
   @override
   AuthFormState<AuthForm> createState();
 
@@ -34,10 +38,12 @@ abstract class AuthFormState<T extends AuthForm> extends State<T> with FormTextF
     );
   }
 
+  dynamic collectData();
+
   void onSubmitPressed() {
     _formKey.currentState.save();
     if (_formKey.currentState.validate()) {
-
+      widget.onSubmit(collectData());
     }
   }
 
