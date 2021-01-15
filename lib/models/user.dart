@@ -37,6 +37,8 @@ class User extends BaseObject {
 
   }
 
+  String get fullName => "$firstName $lastName";
+
   @override
   Map<String, dynamic> toMap() {
     var dict = super.toMap();

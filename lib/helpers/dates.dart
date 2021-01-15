@@ -16,5 +16,11 @@ class DateUtil {
     return parsingDateFormat.format(date);
   }
 
+  static String friendlyFormat(DateTime date) {
+    if (date == null)
+      return null;
+    return DateFormat("yyyy-MM-dd HH:mm").format(date);
+  }
+
 
 }

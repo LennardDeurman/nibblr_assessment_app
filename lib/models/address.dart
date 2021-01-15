@@ -39,4 +39,9 @@ class Address extends BaseObject {
     return superDict;
   }
 
+  @override
+  String toString() {
+    return "$street $number, $city";
+  }
+
 }
