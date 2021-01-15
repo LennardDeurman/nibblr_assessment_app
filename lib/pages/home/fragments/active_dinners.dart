@@ -7,6 +7,7 @@ import 'package:nibblr/components/navigation/navigation_drawer.dart';
 import 'package:nibblr/logic/downloader.dart';
 import 'package:nibblr/models/dinner.dart';
 import 'package:nibblr/network/api.dart';
+import 'package:nibblr/pages/dinner.dart';
 
 class ActiveDinnersNavigationChild extends NavigationDrawerChild {
 
@@ -83,7 +84,13 @@ class ActiveDinnersFragmentState extends FragmentState<ActiveDinnersFragment> {
           builder: (BuildContext context, AsyncSnapshot<List<Dinner>> snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(itemBuilder: (BuildContext context, int position) {
-                return DinnerCell(snapshot.data[position]);
+                return DinnerCell(snapshot.data[position], onPressed: (Dinner dinner) {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return DinnerDetailsPage(dinner);
+                    }
+                  ));
+                });
               }, itemCount: snapshot.data.length);
             }
             return ListView();

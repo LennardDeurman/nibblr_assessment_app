@@ -6,7 +6,9 @@ class DinnerCell extends StatelessWidget {
 
   final Dinner dinner;
 
-  DinnerCell (this.dinner);
+  final Function(Dinner) onPressed;
+
+  DinnerCell (this.dinner, { @required this.onPressed });
 
   @override
   Widget build(BuildContext context) {
@@ -61,9 +63,7 @@ class DinnerCell extends StatelessWidget {
               ],
             ),
           ),
-          onTap: () {
-
-          },
+          onTap: () => onPressed(dinner),
         ),
       ),
     );
