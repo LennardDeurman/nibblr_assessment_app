@@ -19,12 +19,8 @@ class DinnerDetailsPage extends StatefulWidget {
 
 class DinnerDetailsPageState extends State<DinnerDetailsPage> {
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   Widget textBox({ @required String label, @required String value }) {
     return Container(margin: EdgeInsets.all(20), child: Column(
@@ -46,16 +42,17 @@ class DinnerDetailsPageState extends State<DinnerDetailsPage> {
     Future future = Api().enrollForDinner(widget.dinner.id);
     ProgressDialogHelper.attach(context, future);
     future.then((v) {
-      Scaffold.of(context).showSnackBar(SnackBar(content: Text("Succesvol ingeschreven")));
+      _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Succesvol ingeschreven")));
     });
     future.catchError((e) {
-      Scaffold.of(context).showSnackBar(SnackBar(content: Text("Er ging iets mis!")));
+      _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Er ging iets mis!")));
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text(widget.dinner.title),
       ),
@@ -67,9 +64,13 @@ class DinnerDetailsPageState extends State<DinnerDetailsPage> {
             textBox(label: "Organisator", value: widget.dinner.host.fullName),
             textBox(label: "Adres", value: widget.dinner.address.toString()),
             textBox(label: "Wie komen er?", value: widget.dinner.guests.map((e) => e.fullName).toList().join(", ")),
-            RaisedButton(
-              child: Text("Inschrijven", style: TextStyle(color: Colors.white)),
-              onPressed: _enrollForDinner,
+            Container(
+              child: RaisedButton(
+                child: Text("Inschrijven", style: TextStyle(color: Colors.white),),
+                color: Colors.orange,
+                onPressed: _enrollForDinner,
+              ),
+              margin: EdgeInsets.all(20),
             )
           ],
         ),

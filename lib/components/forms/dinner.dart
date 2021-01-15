@@ -109,9 +109,13 @@ class DinnerFormState extends State<DinnerForm> with FormTextFields {
               ],
             ),
           ),
-          RaisedButton(
-            child: Text("Aanmaken", style: TextStyle(color: Colors.white)),
-            onPressed: _onSubmitPressed,
+          Container(
+            child: RaisedButton(
+              child: Text("Aanmaken", style: TextStyle(color: Colors.white),),
+              color: Colors.orange,
+              onPressed: _onSubmitPressed,
+            ),
+            margin: EdgeInsets.all(20),
           )
 
 
