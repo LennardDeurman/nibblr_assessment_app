@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nibblr/components/forms/base.dart';
 
 abstract class AuthForm extends StatefulWidget {
 
@@ -7,38 +8,10 @@ abstract class AuthForm extends StatefulWidget {
 
 }
 
-abstract class AuthFormState<T extends AuthForm> extends State<T> {
+abstract class AuthFormState<T extends AuthForm> extends State<T> with FormTextFields {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  Widget multiLineTextField({ @required TextEditingController controller, @required String labelText, @required String hintText, int minLines = 3, int maxLines = 5 }) {
-    return TextFormField(
-      keyboardType: TextInputType.multiline,
-      minLines: minLines,
-      maxLines: maxLines,
-      controller: controller,
-      decoration: InputDecoration(
-          labelText: labelText,
-          hintText: hintText,
-          contentPadding: EdgeInsets.only(
-              bottom: 18
-          )
-      ),
-    );
-  }
-
-  Widget textFormField({ @required TextEditingController controller, @required String labelText, @required String hintText }) {
-    return TextFormField(
-      controller: controller,
-      decoration: InputDecoration(
-          labelText: labelText,
-          hintText: hintText,
-          contentPadding: EdgeInsets.only(
-              bottom: 18
-          )
-      ),
-    );
-  }
 
   Widget submitButton({ @required String labelText }) {
     return FlatButton(

@@ -7,6 +7,7 @@ import 'package:nibblr/components/navigation/navigation_drawer.dart';
 import 'package:nibblr/logic/downloader.dart';
 import 'package:nibblr/models/dinner.dart';
 import 'package:nibblr/network/api.dart';
+import 'package:nibblr/pages/create_dinner.dart';
 import 'package:nibblr/pages/dinner.dart';
 
 class ActiveDinnersNavigationChild extends NavigationDrawerChild {
@@ -28,6 +29,7 @@ class ActiveDinnersNavigationChild extends NavigationDrawerChild {
   @override
   Widget floatingActionButton(BuildContext context) {
     return FloatingActionButton(
+      child: Icon(Icons.add),
       onPressed: () => fragmentKey.currentState.onFloatingButtonPressed(context),
     );
   }
@@ -65,6 +67,15 @@ class ActiveDinnersFragmentState extends FragmentState<ActiveDinnersFragment> {
 
     super.initState();
 
+  }
+
+  @override
+  void onFloatingButtonPressed(BuildContext context) {
+    Navigator.push(context, MaterialPageRoute(
+      builder: (BuildContext context) {
+        return CreateDinnerPage();
+      }
+    ));
   }
 
   @override
